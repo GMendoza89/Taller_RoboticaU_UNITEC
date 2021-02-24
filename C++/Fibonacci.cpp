@@ -6,28 +6,30 @@ int main(int argc, char** argv){
 //declaracion de variables
 unsigned int numero_elementos, ext;
 long unsigned int *serie_fibonacci;
-char nombre[20];
 std::ofstream fichero;
 std::string nombre_fichero;
 std::string extencion[2];
 extencion[0]=".txt";
 extencion[1]=".csv";
 ext = 0;
+
 //lectura de argumentos o solicitud de datos
-if(argc!=4){
+if(argc == 2){
+    numero_elementos = atoi(argv[1]);
+}else if(argc == 3){
+    numero_elementos = atoi(argv[1]);
+    nombre_fichero = std::string(argv[2])+extencion[0];
+}else if (argc == 4){
+    numero_elementos = atoi(argv[1]);
+    nombre_fichero = std::string(argv[2])+extencion[atoi(argv[3])];
+}else
+{
     std::cout<<"Favor de ingresar un número: ";
     std::cin>>numero_elementos;
     std::cout<<std::endl;
-    std::cout<<"Ingresar nombre de fichero de salida: ";
-    std::cin>>nombre;
-    std::cout<<"Ingresar la extencion 0 - txt (por defecto) 1 - csv: ";
-    std::cin>>ext;
-    nombre_fichero = std::string(nombre)+extencion[0];
- }
-else{
-    numero_elementos = atoi(argv[1]);
-    nombre_fichero = std::string(argv[2])+extencion[atoi(argv[3])];}
-std::cout<<std::endl;
+    nombre_fichero = "fibonacci"+extencion[0];
+}
+
 
 serie_fibonacci = new long unsigned int(numero_elementos);
 fichero.open(nombre_fichero.c_str());
