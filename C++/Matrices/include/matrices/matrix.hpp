@@ -4,11 +4,14 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+//#include<OpenGL/gl.h>
+//#include<OpenGL/glu.h>
 
 class matrix{
     private:
     int cols,rows;
     double **data;
+    const std::string extencions[2] = {".txt",".csv"};
     
     public:
         matrix();
@@ -28,9 +31,14 @@ class matrix{
         void save_matrix();
         void save_matrix(std::string name);
         void save_matrix(std::string name, int extencion);
-        
-        
         void load_matrix(std::string Filename);
+        //Sobrecarga de operadores
+        matrix operator=(const matrix &A);
+        matrix operator + (const matrix &A);
+        matrix operator + (double N);
+        
+        
+        
         
 
 };
