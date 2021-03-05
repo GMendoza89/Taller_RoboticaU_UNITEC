@@ -10,7 +10,6 @@ Buttom b_red(6);
 Buttom b_green(5);
 Buttom b_blue(4);
 
-
 void setup() {
   // put your setup code here, to run once:
   L1.SETUP();
@@ -26,34 +25,34 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  if(Boton_1.read_state()){
-    L1.Led_ON();
+  if(Boton_1.Read()){
+    L1.on();
   }else{
-    L1.Led_off();
+    L1.off();
   }
-  if(b_red.read_state()){
-    L_red.Led_ON();
-  }
-  else{
-    L_red.Led_off();
-  }
-  if(b_red.read_state()){
-    L_red.Led_ON();
+  if(b_red.Read()){
+    L_red.on();
   }
   else{
-    L_red.Led_off();
+    L_red.off();
   }
-  if(b_green.read_state()){
-    L_green.Led_ON();
-  }
-  else{
-    L_green.Led_off();
-  }
-  if(b_blue.read_state()){
-    L_blue.Led_ON();
+  if(b_red.Read()){
+    L_red.on();
   }
   else{
-    L_blue.Led_off();
+    L_red.off();
+  }
+  if(b_green.Read()){
+    L_green.on();
+  }
+  else{
+    L_green.off();
+  }
+  if(b_blue.Read()){
+    L_blue.on();
+  }
+  else{
+    L_blue.off();
   }
 
 }

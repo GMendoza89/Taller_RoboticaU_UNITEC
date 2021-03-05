@@ -1,0 +1,35 @@
+#######################################
+# Syntax Coloring Map for AFMotor
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+LED	KEYWORD1
+LED_RGB	KEYWORD1
+Buttom KEYWORD1
+Pot KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+SETUP	KEYWORD2
+on	KEYWORD2
+off	KEYWORD2
+on_pwm	KEYWORD2
+BLINK	KEYWORD2
+SET	KEYWORD2
+on_birghtness KEYWORD2
+on_r KEYWORD2
+on_b KEYWORD2
+on_g KEYWORD2
+off_r KEYWORD2
+off_b KEYWORD2
+off_g KEYWORD2
+Read KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
