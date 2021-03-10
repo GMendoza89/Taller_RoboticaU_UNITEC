@@ -117,19 +117,15 @@ Buttom::Buttom(){
 Buttom::Buttom(unsigned char P){
   PIN = P;
 }
-
 Buttom::~Buttom(){
   
 }
-
 void Buttom::SET(unsigned char P){
   PIN = P;
 }
-
 void Buttom::SETUP(){
   pinMode(PIN,INPUT);
 }
-
 bool Buttom::Read(){
   return digitalRead(PIN);
 }
@@ -148,3 +144,125 @@ int Pot::Read(){
   return analogRead(analog_value);
 }
 unsigned char Pot::pwm_value(){return analogRead(analog_value)/4;}
+
+//---------------------------- Shift Register 74HC595 --------------------------
+
+shiftR74HC595::shiftR74HC595(){
+  latchPin = 8;
+  clockPin = 11;
+  dataPin = 12;
+}
+shiftR74HC595::shiftR74HC595(unsigned char ST_CP,unsigned char SH_CP, unsigned char DS){
+  latchPin = ST_CP;
+  clockPin = SH_CP;
+  dataPin = DS;
+}
+shiftR74HC595::~shiftR74HC595(){ 
+
+}
+void shiftR74HC595::SETUP(){
+  // set all pins as output
+  pinMode(latchPin,OUTPUT); //latch pin
+  pinMode(clockPin,OUTPUT); // clock pin
+  pinMode(dataPin,OUTPUT); // data pin
+  Serial.begin(9600);
+  Serial.print("Registro de desplazamiento configurado ");
+  Serial.print("latch pin: ");
+  Serial.print(latchPin);
+  Serial.print(" ");
+  Serial.print("clock pin: ");
+  Serial.print(clockPin);
+  Serial.print(" ");
+  Serial.print("latch pin: ");
+  Serial.print(dataPin);
+  Serial.println(" ");
+}
+void shiftR74HC595::shiftO(byte *data){
+  bool data_state = LOW;
+  digitalWrite(dataPin,LOW);
+  digitalWrite(clockPin, LOW);
+Serial.println("Enviando datos");
+  for(int i0 = 7; i0 >= 0; i0--){
+    digitalWrite(clockPin,LOW);
+
+    data_state = bitRead(*data,i0);
+    digitalWrite(dataPin,data_state);
+    Serial.print("enviando dato[");
+    Serial.print(i0);
+    Serial.print("] = ");
+    Serial.println(data_state);
+
+    digitalWrite(clockPin,HIGH);
+
+    digitalWrite(clockPin,LOW);
+  }
+
+  digitalWrite(clockPin,LOW);
+
+}
+void shiftR74HC595::shiftOut(byte dataout){
+
+  digitalWrite(latchPin,LOW);
+  shiftO(&dataout);
+  digitalWrite(latchPin,HIGH);
+
+}
+void shiftR74HC595::shiftOut_2Bytes(word dataout){
+  
+  data_l = lowByte(dataout);
+  data_h = highByte(dataout);
+  digitalWrite(latchPin,LOW);
+  shiftO(&data_h);
+  shiftO(&data_l);
+  digitalWrite(latchPin,HIGH);
+
+}
+void shiftR74HC595::shiftOut_2Bytes(byte data_hight, byte data_low){
+  digitalWrite(latchPin,LOW);
+  shiftO(&data_hight);
+  shiftO(&data_low);
+  digitalWrite(latchPin,HIGH);
+}
+void shiftR74HC595::blinkAll(unsigned char n_blink,unsigned int blink_time){
+  data_h = 0xff;
+  data_l = 0x00;
+  Serial.println("Prepaprando parpadeo de los 8 leds");
+  digitalWrite(latchPin,LOW);
+  shiftO(&data_l);
+  digitalWrite(latchPin,HIGH);
+  delay(200);
+
+  for(unsigned char i0 = 0; i0<n_blink;i0++){
+    digitalWrite(latchPin,LOW);
+    shiftO(&data_h);
+    digitalWrite(latchPin,HIGH);
+    delay(blink_time);
+    digitalWrite(latchPin,LOW);
+    shiftO(&data_l);
+    digitalWrite(latchPin,HIGH);
+    delay(blink_time);
+  }
+
+}
+void shiftR74HC595::blinkAll_2bytes(unsigned char n_blink,unsigned int blink_time){
+  data_h = 0xff;
+  data_l = 0x00;
+  digitalWrite(latchPin,LOW);
+  shiftO(&data_l);
+  shiftO(&data_l);
+  digitalWrite(latchPin,HIGH);
+  delay(200);
+
+  for(unsigned char i0 = 0; i0<n_blink;i0++){
+    digitalWrite(latchPin,LOW);
+    shiftO(&data_h);
+    shiftO(&data_h);
+    digitalWrite(latchPin,HIGH);
+    delay(blink_time);
+    digitalWrite(latchPin,LOW);
+    shiftO(&data_l);
+    shiftO(&data_l);
+    digitalWrite(latchPin,HIGH);
+    delay(blink_time);
+  }
+}

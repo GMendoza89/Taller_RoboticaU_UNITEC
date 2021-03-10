@@ -4,7 +4,6 @@
 class LED{
   private:
     unsigned char PIN;
-    unsigned char Intensity;
   public:
     unsigned char Intensity;
     LED();
@@ -67,5 +66,35 @@ public:
 
   int Read();
   unsigned char pwm_value();
+};
+
+
+class shiftR74HC595{
+  //use the shift Register SN74HC59
+private:
+unsigned char latchPin; //Pin connected to ST_CP of 74HC595
+unsigned char clockPin; //Pin connected to SH_CP of 74HC595
+unsigned char dataPin; //Pin connected to DS of 74HC595
+byte data_h;
+byte data_l;
+
+void shiftO(byte *data);
+
+public:
+shiftR74HC595();
+shiftR74HC595(unsigned char ST_CP,unsigned char SH_CP, unsigned char DS);
+~shiftR74HC595();
+void SETUP();
+
+void shiftOut(byte dataout);
+void shiftOut_2Bytes(word dataout);
+void shiftOut_2Bytes(byte data_hight, byte data_low);
+void blinkAll(unsigned char n_blink,unsigned int blink_time);
+void blinkAll_2bytes(unsigned char n_blink,unsigned int blink_time);
+
+
+
+
+
 };
 #endif
