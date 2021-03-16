@@ -97,4 +97,21 @@ void blinkAll_2bytes(unsigned char n_blink,unsigned int blink_time);
 
 
 };
+class ultrasonico{
+  private:
+    unsigned char TRIG; //
+    unsigned char ECHO;
+
+    int TIEMPO;
+    float distancia;
+    const float velocidad = 0.034; // constante velocidad del sonido
+  public:
+    ultrasonico();
+    ultrasonico(unsigned char T, unsigned char G);
+    ~ultrasonico();
+
+    void SETUP();
+    int Distancia();
+    
+};
 #endif

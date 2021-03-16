@@ -266,3 +266,41 @@ void shiftR74HC595::blinkAll_2bytes(unsigned char n_blink,unsigned int blink_tim
     delay(blink_time);
   }
 }
+
+ultrasonico::ultrasonico(){
+  TRIG = 2;
+  ECHO= 3;
+
+}
+ultrasonico::ultrasonico(unsigned char T, unsigned char G){
+  TRIG = T;
+  ECHO= G;
+
+}
+ultrasonico::~ultrasonico(){
+
+}
+
+void ultrasonico::SETUP(){
+  pinMode(TRIG,OUTPUT);
+  pinMode(ECHO,INPUT);
+
+}
+int ultrasonico::Distancia(){
+    digitalWrite(TRIG,LOW);
+    delay(2);
+    digitalWrite(TRIG,HIGH);
+    delay(10);
+    digitalWrite(TRIG,LOW);
+
+    TIEMPO = pulseIn(ECHO,HIGH);
+
+    // V = Distancia recorrida/Tiempo que tardamos
+    // v = (34 m/seg) 
+    // TIEMPO = PULSO 
+    // DISTANCIA = V*TIEMPO/2;
+
+    distancia = velocidad*TIEMPO/2;
+    return distancia;
+}
+
