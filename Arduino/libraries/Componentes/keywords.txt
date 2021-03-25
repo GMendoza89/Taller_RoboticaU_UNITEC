@@ -10,6 +10,9 @@ LED	KEYWORD1
 LED_RGB	KEYWORD1
 Buttom KEYWORD1
 Pot KEYWORD1
+shiftR74HC595 KEYWORD1
+ultrasonico KEYWORD1
+DC_Motor KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -29,7 +32,19 @@ off_r KEYWORD2
 off_b KEYWORD2
 off_g KEYWORD2
 Read KEYWORD2
+shiftOut KEYWORD2
+shiftOut_2Bytes KEYWORD2
+blinkAll KEYWORD2
+blinkAll_2bytes KEYWORD2
+Distancia KEYWORD2
+SET_POWER KEYWORD2
+Move KEYWORD2
+STOP KEYWORD2
+OFF KEYWORD2 
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+MOVE_FORWARD LITERAL1
+MOVE_BACKWARD LITERAL1

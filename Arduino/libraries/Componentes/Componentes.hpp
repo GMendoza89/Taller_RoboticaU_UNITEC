@@ -1,6 +1,10 @@
 #ifndef COMPONENTES_HPP
 #define COMPONENTES_HPP
 #include<Arduino.h>
+
+#define MOVE_FORWARD true
+#define MOVE_BACKWARD false
+
 class LED{
   private:
     unsigned char PIN;
@@ -114,4 +118,26 @@ class ultrasonico{
     int Distancia();
     
 };
+
+class DC_Motor{
+  private:
+  byte Motor_A;
+  byte Motor_B;
+  byte Motor_En;
+  byte Power_Motor;
+
+  public:
+  DC_Motor();
+  DC_Motor(byte A, byte B, byte En);
+  ~DC_Motor();
+
+  void SETUP();
+  void SET_POWER(byte PWD);
+  void Move(bool direction);
+  void Move(bool direction, byte POWER);
+  void STOP();
+  void OFF();
+
+};
+
 #endif

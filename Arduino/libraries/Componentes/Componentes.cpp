@@ -266,7 +266,7 @@ void shiftR74HC595::blinkAll_2bytes(unsigned char n_blink,unsigned int blink_tim
     delay(blink_time);
   }
 }
-
+//--------------------------- Ultrasonic Sensor HC-SR04 -------------------------------
 ultrasonico::ultrasonico(){
   TRIG = 2;
   ECHO= 3;
@@ -304,3 +304,58 @@ int ultrasonico::Distancia(){
     return distancia;
 }
 
+//-------------------------- DC Motor -------------------------------------------------
+
+DC_Motor::DC_Motor(){
+  Motor_A = 2;
+  Motor_En = 3;
+  Motor_B = 4;
+  Power_Motor = 0;
+}
+DC_Motor::DC_Motor(byte A, byte B, byte En){
+  Motor_A = A;
+  Motor_En = En;
+  Motor_B = B;
+  Power_Motor = 0;
+}
+DC_Motor::~DC_Motor(){}
+void DC_Motor::SETUP(){
+
+  pinMode(Motor_A,OUTPUT);
+  pinMode(Motor_B,OUTPUT);
+  pinMode(Motor_En,OUTPUT);
+
+}
+void DC_Motor::SET_POWER(byte PWD){Power_Motor = PWD;}
+void DC_Motor::Move(bool direction){
+
+  if(direction){
+    digitalWrite(Motor_A,HIGH);
+    digitalWrite(Motor_B,LOW);
+  }else{
+    digitalWrite(Motor_A,LOW);
+    digitalWrite(Motor_B,HIGH);
+  }
+  analogWrite(Motor_En,Power_Motor);
+
+}
+void DC_Motor::Move(bool direction, byte POWER){
+
+  Power_Motor = POWER;
+  if(direction){
+    digitalWrite(Motor_A,HIGH);
+    digitalWrite(Motor_B,LOW);
+  }else{
+    digitalWrite(Motor_A,LOW);
+    digitalWrite(Motor_B,HIGH);
+  }
+  analogWrite(Motor_En,Power_Motor);
+}
+void DC_Motor::STOP(){
+  digitalWrite(Motor_A,HIGH);
+  digitalWrite(Motor_B,HIGH);
+}
+void DC_Motor::OFF(){
+  digitalWrite(Motor_A,LOW);
+  digitalWrite(Motor_B,LOW);
+}
