@@ -1,0 +1,99 @@
+#######################################
+# Syntax Coloring Map for AFMotor
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Locomotor   KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+SETUP	KEYWORD2
+MOVE    KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MOVE_RELEASE LITERAL1
+MOVE_FORWARD LITERAL1
+MOVE_BACKWARD LITERAL1
+MOVE_BREAK  LITERAL1
+
+DC_Motor_1 LITERAL1
+DC_Motor_2 LITERAL1
+DC_Motor_3 LITERAL1
+DC_Motor_4 LITERAL1
+
+RS_SERVO_1 LITERAL1
+RS_SERVO_2 LITERAL1
+RS_SERVO_3 LITERAL1
+
+Ultrasonic_Sensor_1 LITERAL1
+Ultrasonic_Sensor_2 LITERAL1
+Ultrasonic_Sensor_3 LITERAL1
+Ultrasonic_Sensor_4 LITERAL1
+Ultrasonic_Sensor_5 LITERAL1
+Ultrasonic_Sensor_5 LITERAL1
+Ultrasonic_Sensor_6 LITERAL1
+Ultrasonic_Sensor_7 LITERAL1
+Ultrasonic_Sensor_8 LITERAL1
+
+mm LITERAL1
+cm LITERAL1
+m LITERAL1
+
+pi LITERAL1
+Sound_speed_mm LITERAL1
+Sound_speed_cm LITERAL1
+Sound_speed_cm LITERAL1
+Sound_speed_m LITERAL1
+
+ 
+#######################################
+# Units and intruction (LITERAL2)
+#######################################
+
+
+GM_motor_controller_CLK LITERAL2
+GM_motor_controller_latch LITERAL2
+GM_motor_controller_data LITERAL2
+
+Motor_1_A LITERAL1
+Motor_1_B LITERAL1
+Motor_2_A LITERAL1
+Motor_2_B LITERAL1
+Motor_3_A LITERAL1
+Motor_3_B LITERAL1
+Motor_4_A LITERAL1
+Motor_4_B LITERAL1
+
+
+EN_DC_Motor_1 LITERAL2
+EN_DC_Motor_2 LITERAL2
+EN_DC_Motor_3 LITERAL2
+EN_DC_Motor_4 LITERAL2
+
+Ultrasonic_sensor_1_trig LITERAL2
+Ultrasonic_sensor_1_echo LITERAL2
+Ultrasonic_sensor_2_trig LITERAL2
+Ultrasonic_sensor_2_echo LITERAL2
+
+Ultrasonic_sensor_3_trig LITERAL2
+Ultrasonic_sensor_3_trig LITERAL2
+Ultrasonic_sensor_3_echo LITERAL2
+Ultrasonic_sensor_4_trig LITERAL2
+Ultrasonic_sensor_4_echo LITERAL2
+Ultrasonic_sensor_5_trig LITERAL2
+Ultrasonic_sensor_5_echo LITERAL2
+Ultrasonic_sensor_6_trig LITERAL2
+Ultrasonic_sensor_6_echo LITERAL2
+Ultrasonic_sensor_7_trig LITERAL2
+Ultrasonic_sensor_7_echo LITERAL2
+Ultrasonic_sensor_8_trig LITERAL2
+Ultrasonic_sensor_8_echo LITERAL2
