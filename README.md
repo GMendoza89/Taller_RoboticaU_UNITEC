@@ -32,7 +32,7 @@ Libreria creada para el curso en que se tienen clases de componentes que se util
 	- Clase DC_Motor. Abtracción de un motor o motoreductor en CD, para su uso con un puente H y la IDE de Arduino.
 
 
-## Robot Shiold
+## Robot Shield
 Placa de circuito Impreso diseñada, como interface entre los sensores y actuadores de un robot diferencial, y una targeta de desarrollo Arduino UNO y compactibles.
 Cuenta con las interfaces para los siguinetes puertos:
 	- Coneccion con punte H L293D para control de dos motores en DC.
