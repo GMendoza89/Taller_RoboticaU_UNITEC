@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2021-07-14T17:40:56Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "SHIEL_V0.01"
+        },
+        "Owner": "Gustavo David Mendoza Pinto <gd.mendozapinto@ugto.mx>",
+        "Size": {
+            "X": 55.55,
+            "Y": 60.95
+        }
+    }
+}
