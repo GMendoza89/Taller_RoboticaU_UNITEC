@@ -9,8 +9,6 @@
 *   Autor: Ing. Gustavo David Mendoza Pinto
 *
 *
-*
-*
 */
 #ifndef ROBOT_SHIELD_UNO
 #define ROBOT_SHIELD_UNO
@@ -51,9 +49,9 @@
 #define m 2
 
 #define pi 3.1416
-#define Sound_speed_mm 0.0034
-#define Sound_speed_cm 0.034
-#define Sound_speed_m 0.34
+#define Sound_speed_mm 0.344
+#define Sound_speed_cm 0.0344
+#define Sound_speed_m 0.000344
 
 
 void step_counter_M1();
@@ -83,12 +81,14 @@ class Locomotor{
 
 class Ultrasonic{
     private:
+    float Distance;
+    long int Time;
 
     public:
     Ultrasonic();
     ~Ultrasonic();
     void SETUP();
-    float Distance(int units);
+    float getDistance(int units);
 
 };
 
