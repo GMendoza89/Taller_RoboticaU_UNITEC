@@ -41,19 +41,39 @@
 #define MOVE_RIGH 4
 #define MOVE_LEFT 5
 
+#define servo_signal 10
+
+#define ECHO 13
+#define TRIG 12
+
+#define mm 0
+#define cm 1
+#define m 2
+
+#define pi 3.1416
+#define Sound_speed_mm 0.0034
+#define Sound_speed_cm 0.034
+#define Sound_speed_m 0.34
+
+
+void step_counter_M1();
+void step_counter_M2();
 
 
 class Locomotor{
     private:
-
-
+    float radius; //Radio de las Rudas
+    float length; // distancia entre los radios
+    int step_per_radius;
 
     public:
 
     Locomotor();
+    Locomotor(float r, float l);
     ~Locomotor();
 
     void SETUP();
+    void SETUP_E();
     void MOVE(int move);
 
     void MOVE(int move, byte PM1, byte PM2);
@@ -61,5 +81,15 @@ class Locomotor{
 
 };
 
+class Ultrasonic{
+    private:
+
+    public:
+    Ultrasonic();
+    ~Ultrasonic();
+    void SETUP();
+    float Distance(int units);
+
+};
 
 #endif
