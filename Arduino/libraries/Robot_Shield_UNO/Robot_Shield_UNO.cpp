@@ -2,45 +2,39 @@
 
 //variablesglobales para utilizar en las funciones de los encoder
 
-long int counter_m1;
-long int counter_m2;
+long int step_m1;
+long int step_m2;
 
 bool direction_m1; // booleano que indica el signo positivo es en direccion hacia adelante, falso es direccion contraria.
 bool direction_m2;
 
-long int counter_m1_t; //pasos para estimar la posicion, el signo indica el sentido en que se ha avanzado
-long int counter_m2_t;
+// long int steps_m1; //pasos para estimar la posicion, el signo indica el sentido en que se ha avanzado
+//long int step_m2_t;
 
 
 //Funciones globales para encoder
 
 void step_counter_M1(){
-    ++counter_m1;
-    if(direction_m1){
-        ++counter_m1_t;
-    }else{
-        --counter_m1_t;
-    }
-
+    direction_m1?++step_m1:--step_m1;
 }
 void step_counter_M2(){
-    ++counter_m2;
-    if(direction_m2){
-        ++counter_m2_t; 
-    }else{
-        --counter_m2_t;
-    }
+    direction_m2?++step_m2:--step_m2;
 }
-
+//------------------------------------- Clase del sistema locomotor ----------------------------------------------
 Locomotor::Locomotor(){
     radius = 0;
     length = 0;
     step_per_radius = 20;
 }
-Locomotor::Locomotor(float r, float l){
+Locomotor::Locomotor(double r, double l){
     radius = r;
     length = l;
     step_per_radius = 20;
+}
+Locomotor::Locomotor(double r, double l, long int N){
+    radius =r;
+    length = l;
+    step_per_radius = N;
 }
 
 Locomotor::~Locomotor(){
@@ -55,9 +49,23 @@ void Locomotor::SETUP(){
     pinMode(En_Motor_1,OUTPUT);
     pinMode(En_Motor_2,OUTPUT);
 }
-void Locomotor::SETUP_E(){
+void Locomotor::SETUP_Odom(){
     attachInterrupt(digitalPinToInterrupt(I_Endoder_1),step_counter_M1,FALLING);
-    attachInterrupt(digitalPinToInterrupt(I_Endoder_2),step_counter_M2,FALLING);
+    attachInterrupt(digitalPinToInterrupt(I_Endoder_2),step_counter_M2,FALLING); 
+    delta_R_steps = 0; 
+    delta_L_steps = 0;
+    L_steps_past = 0;
+    R_steps_past = 0;                         
+    vr = 0; 
+    vl = 0; 
+    base_Distance = 0;                                                 
+    R_distance=0; 
+    L_distance= 0;
+    R_distance_past=0; 
+    L_distance_past=0;
+    x =0;
+    y = 0;
+    theta = 0;
 }
 void Locomotor::MOVE(int move){
 
@@ -156,7 +164,53 @@ void Locomotor::MOVE(int move, byte PM1, byte PM2){
         break;
     }
 }
+void Locomotor::Odom(){
+    delta_R_steps = step_m2 - R_steps_past;                                 // calculo cambio pasos
+    delta_L_steps = step_m1 - L_steps_past;
+    // Serial.print(step_m2);
+    // Serial.print(",");
+    // Serial.println(step_m1);
 
+    L_distance = pi*2*radius*(delta_L_steps/((double)step_per_radius));    // Distancia L
+    R_distance = pi*2*radius*(delta_R_steps/((double)step_per_radius));    // Distancia R
+
+    base_Distance = (R_distance+L_distance)/2;                              // distanciade labase del robot
+
+    x += base_Distance*cos(theta);
+    y += base_Distance*sin(theta);
+
+    theta += (R_distance - L_distance)/length;
+    theta = atan2(sin(theta),cos(theta));
+
+    R_steps_past = step_m2;
+    L_steps_past = step_m1;
+
+    //  Serial.print(x);
+    //  Serial.print(",");
+    //  Serial.println(y);
+
+}
+
+void Locomotor::Vel(){
+
+
+    vr = 1000*(R_distance)/Salmple_Time;
+    vl = 1000*(L_distance)/Salmple_Time;
+
+    // Serial.print(step_m2);
+    // Serial.print(",");
+    // Serial.println(step_m1);
+    
+    // Serial.print(R_distance);
+    // Serial.print(",");
+    // Serial.println(L_distance);
+
+    Serial.print(vr);
+    Serial.print(",");
+    Serial.println(vl);
+
+
+}
 
 //------------------------------ Ultrasonic class ------------------------------------------------------------------
 
@@ -201,6 +255,6 @@ float Ultrasonic::getDistance(int units){
         break;
     }
     return Distance;
-
     
+
 }
